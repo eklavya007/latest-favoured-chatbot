@@ -11,8 +11,8 @@ export default async function handler(req, res) {
       .json({ error: "OPENAI_API_KEY is not set on the server." });
   }
 
-  try, {
-    const { messages } = req.body || {};
+  try {
+    const { messages } = req.body ?? {};
 
     if (!Array.isArray(messages)) {
       return res.status(400).json({ error: "Invalid request body" });
@@ -45,7 +45,7 @@ Your job:
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "gpt-4.1-mini", // or "gpt-4.1" / "gpt-4o-mini" if you prefer
+        model: "gpt-4.1-mini", // or "gpt-4.1" / "gpt-4o-mini"
         messages: [systemMessage, ...messages],
       }),
     });
